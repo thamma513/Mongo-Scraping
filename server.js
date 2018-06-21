@@ -18,24 +18,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 
 app.get("/", function(req, res) {
-    axios.get("https://politics.theonion.com/").then(function(response) {
+    axios.get("https://www.npr.org/sections/art-design/").then(function(response) {
       var $ = cheerio.load(response.data);
 
-      $("h1.headline").each(function(i, element) {
+      $("article").each(function(i, element) {
         var result = {};
   
-        result.headline = $(this)
-          .children("a")
-          .text();
-        result.link = $(this)
-          .children("a")
-          .attr("href");
-        result.summary = $(this)
-          .children("")
-          .text();
+        result.image = $(this).children("div").children("div").children("a").children("img")
+        .attr("src");
+        result.link = $(this).children("div").children("div").children("a")
+        .attr("href");
+        result.headline = $(this).children("div").children("h2")
+        .text();
+        result.summary = $(this).children("div").children("p").children("a")
+        .text();
   
         db.Article.create(result)
           .then(function(dbArticle) {
@@ -73,7 +74,7 @@ app.get("/", function(req, res) {
   
   app.post("/articles/:id", function(req, res) {
     db.Comments.create(req.body)
-      .then(function(dbNote) {
+      .then(function(dbComments) {
  
         return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbComments._id }, { new: true });
       })

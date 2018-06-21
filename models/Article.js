@@ -5,6 +5,10 @@ var Schema = mongoose.Schema;
 
 
 var ArticleSchema = new Schema({
+  image:{
+    type: String,
+    required: true
+  },
   headline: {
     type: String,
     required: true
