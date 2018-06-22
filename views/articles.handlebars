@@ -4,9 +4,9 @@
   {{#each article}}
   <li>
     <p>
-      {{this.article}}. {{this.comments}}
+      {{headline}}{{link}}{{summary}}{{image}}{{comments}}
 
-      <button data-article="{{this.comment}}" class="addcomments">Add comments!</button>
+      <button data-comments="{{this.comments}}" class="addcomments">Add comments!</button>
     </p>
   </li>
   {{/each}}

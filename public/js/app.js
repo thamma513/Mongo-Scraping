@@ -1,24 +1,24 @@
 // Grab the articles as a json
 $.getJSON("/articles", function(data) {
-    // For each one
     for (var i = 0; i < data.length; i++) {
-      // Display the articles information on the page
+      
       $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].headline + "<br />" + data[i].link +"<br />" + data[i].summary + "<br />" + data[i].immage + "<br />" + data[i].comments + "</p>");
     }
   });
  
-  $(document).on("click", "p", function() {
+  $(document).on("click", "addcomments", function() {
     
     // Now make an ajax call for the Article
     $.ajax({
       method: "GET",
-      url: "/articles/" + thisId
+      url: "/comments/" + thisId
     })
       // With that done, add the comments information to the page
       .then(function(data) {
         console.log(data);
         // The headline of the article
         $("#articles").append("<h2>" + data.headline + "</h2>");
+        $("#")
         // An input to enter a new comment
         $("#comments").append("<input id='titleinput' name='headline' >");
         // A textarea to add a new comment body
