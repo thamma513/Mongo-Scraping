@@ -4,7 +4,29 @@
   {{#each article}}
   <li>
     <p>
-      {{headline}}{{link}}{{summary}}{{image}}{{comments}}
+      {{headline}}
+    </p>
+    <div>
+      <a href="{{link}}" />
+    </div>
+      <p>
+        {{summary}}
+      </p>
+      <p>
+        {{comments}}
+      </p>
+       <div>
+         <img class="artImg" src="{{image}}"/>
+       </div>
+          
+          <form action="index.html" method="post">
+      <label for="title">title:</label>
+      <input type="text" id="title" name="title">
+
+      <label for="comment"> comment: </label>
+      <textarea id="comment" name="comment"></textarea>
+      <button type="submit" data-comments="{{this.comments}}" class="addcomments">Add comments!</button>
+    </form>
 
       <button data-comments="{{this.comments}}" class="addcomments">Add comments!</button>
     </p>

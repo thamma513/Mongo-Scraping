@@ -29,9 +29,9 @@ $.getJSON("/articles", function(data) {
         // If there's a comment on the article
         if (data.comments) {
           // Place the headline of the articles in the headline input
-          $("#titleinput").val(data.articles.headline);
+          $("#titleinput").val(data.comments.title);
           // Place the body of the articles in the body textarea
-          $("#bodyinput").val(data.articles.body);
+          $("#bodyinput").val(data.comments.body);
         }
       });
   });
