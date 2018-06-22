@@ -1,0 +1,19 @@
+<h1> articles</h1>
+
+<ul>
+  {{#each article}}
+  <li>
+    <p>
+      {{this.article}}. {{this.comments}}
+
+      <button data-article="{{this.comment}}" class="addcomments">Add comments!</button>
+    </p>
+  </li>
+  {{/each}}
+</ul>
+   <div id="wrapper">
+      <h1>News Scraper</h1>
+      <h2><i>Daily Art News</i></h2>
+      <div id="articles"></div>
+      <div id="comments"></div>
+    </div>
